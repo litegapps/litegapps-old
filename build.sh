@@ -82,13 +82,12 @@ if [ "$1" = push ]; then
 	git init
 	fi
 	cd $base
-	git add .
 	git commit -m "improvement •> $(date)"
 	if [ ! "$(grep https://github.com/Wahyu6070/litegapps.git $base/.git/config)" ]; then
 	print "- git remote add origin"
 	git remote add origin https://github.com/Wahyu6070/litegapps.git
 	fi
-	print "- git push" && git push -u origin master || print "- git upstream" && git push --set-upstream origin master -f
+	print "- git push" && git push -u origin master
 	print "- Git push done"
 	exit 0
 fi
