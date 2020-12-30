@@ -1,0 +1,15 @@
+litegapps.version=0.8
+litegapps.version.code=8
+codename=stable
+name.builder=wahyu6070
+build.status=wahyu6070
+android.target=10.0
+arch=arm64
+sdk=28
+set.time=true
+date.time=200909271500
+compression=xz
+compression.level=9
+zip.level=9
+litegapps2=false
+
