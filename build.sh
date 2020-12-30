@@ -67,7 +67,6 @@ if [ "$1" = clean ]; then
 		fi
 	done
 	print "- Cleaning Done"
-	sleep 5s
 	exit 0
 fi
 
