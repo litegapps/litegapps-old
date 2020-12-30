@@ -13,8 +13,11 @@ edit config for edit configuration
 ``
 ./make clean (for cleaning)
 ``
+## Download
+[click here](https://wahyu6070.github.io/litegapps)
 ## Social Media
 [telegram](https://t.me/litegapps)
+[xda](https://forum.xda-developers.com/t/litegapps-systemless.4146013/)
 
 ## CREDIT
 [opengapps](https://opengapps.org/)
