@@ -7,11 +7,13 @@ git clone https://github.com/wahyu6070/litegapps
 edit config for edit configuration
 ## building
 ``
-./make (for building)
+sh make (for building)
 ``
-
 ``
-./make clean (for cleaning)
+sh make update (for updating,script,binary)
+``
+``
+sh make clean (for cleaning)
 ``
 ## Download
 [Click here](https://wahyu6070.github.io/litegapps)
@@ -21,3 +23,5 @@ edit config for edit configuration
 [xda](https://forum.xda-developers.com/t/litegapps-systemless.4146013/)
 ## CREDIT
 [opengapps](https://opengapps.org/)
+[apkpure](https://apkpure.com/)
+[kopi installer](https://github.com/wahyu6070/Kopi-installer)
