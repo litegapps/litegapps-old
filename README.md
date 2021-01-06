@@ -9,9 +9,11 @@ edit config for edit configuration
 ``
 sh make (for building)
 ``
+ 
 ``
 sh make update (for updating,script,binary)
 ``
+ 
 ``
 sh make clean (for cleaning)
 ``
@@ -23,5 +25,8 @@ sh make clean (for cleaning)
 [xda](https://forum.xda-developers.com/t/litegapps-systemless.4146013/)
 ## CREDIT
 [opengapps](https://opengapps.org/)
+ 
 [apkpure](https://apkpure.com/)
+ 
 [kopi installer](https://github.com/wahyu6070/Kopi-installer)
+ 
