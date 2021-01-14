@@ -1,11 +1,11 @@
 litegapps.version=0.8
 litegapps.version.code=8
 codename=stable
-name.builder=wahyu6070
-build.status=wahyu6070
-android.target=10.0
+name.builder=example
+build.status=example
+android.target=11.0
 arch=arm64
-sdk=28
+sdk=30
 set.time=true
 date.time=200909271500
 compression=xz
