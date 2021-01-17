@@ -1,7 +1,13 @@
-[submodule "etc/litegapps-controller"]
+[submodule "litegapps-controller"]	
+
 	path = etc/litegapps-controller
+<<<<<<< HEAD
 	url = https://github.com/wahyu6070/litegapps-controller
   
 [submodule "litegapps-controller"]
 	path = litegapps-controller
 	url = https://github.com/wahyu6070/litegapps-controller.git
+=======
+	url = https://github.com/wahyu6070/litegapps-controller.git
+	
+>>>>>>> 51ec8089196c7122665708866c21671665786be4
