@@ -1,5 +1,5 @@
 [submodule "litegapps-controller"]	
 
-	path = etc/litegapps-controller		path = tools/update_payload_extractor
+	path = etc/litegapps-controller
 	url = https://github.com/wahyu6070/litegapps-controller.git
 	
