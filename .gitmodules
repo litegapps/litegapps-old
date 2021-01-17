@@ -2,3 +2,6 @@
 	path = etc/litegapps-controller
 	url = https://github.com/wahyu6070/litegapps-controller
   
+[submodule "litegapps-controller"]
+	path = litegapps-controller
+	url = https://github.com/wahyu6070/litegapps-controller.git
