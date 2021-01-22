@@ -1,11 +1,11 @@
 package main
 
 import (
-    "fmt" 
-    "bufio" 
+    "fmt"
     "os"
     "os/exec"
     "runtime"
+    "time"
 )
 
 var clear map[string]func() //create a map for storing clear funcs
@@ -35,31 +35,34 @@ func CallClear() {
 
 
 func main() {
+	berhentii:
     for true {
+    	var text int = 0.0
     	CallClear()
-    	fmt.Println("      Litegapps Menu")
+    	fmt.Println("        Litegapps Menu")
     	fmt.Println(" ")
     	fmt.Println("1.make")
     	fmt.Println("2.clean")
     	fmt.Println("3.about")
     	fmt.Println("4.exit")
     	fmt.Println(" ")
-    	reader := bufio.NewReader(os.Stdin)
-		fmt.Print(" Select Menu : ")
-		text, _ := reader.ReadString('\n')
-		if text == 1 {
-				fmt.Println("1.make")
-			}
-    	if else text == 2 {
-    		fmt.Println("1.make")
-    	}
-    	if else text == 3 {
-    		fmt.Println("1.make")
-    	}
-		if else text == 4 {
-    		fmt.Println("1.make")
-    	}
-		else {
-			fmt.Println("1.make")
+		fmt.Print("Enter text: ")
+		fmt.Scanln(&text)
+		switch text {
+			case 1:
+			cmd := exec.Command("sh", "pwd")Output()
+			time.Sleep(3 * time.Second)
+			case 2:
+			fmt.Println("2")
+			time.Sleep(3 * time.Second)
+			case 3:
+			fmt.Println("3")
+			time.Sleep(3 * time.Second)
+			case 4:
+				break berhentii
+			default:
+			fmt.Println("Error selected")
+			time.Sleep(2 * time.Second)
+    	 }
     	}
 }
