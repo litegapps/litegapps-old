@@ -7,7 +7,7 @@ git clone https://github.com/wahyu6070/litegapps
 edit config for edit configuration
 
 # compression is supported
-![Alt text](/images/compres_lvl.jpg?raw=true "Optional Title")
+![Alt text](/etc/images/compres_lvl.jpg?raw=true "Optional Title")
 ## building
 ``
 sh make (for building)
