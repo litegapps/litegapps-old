@@ -4,9 +4,9 @@ this is a tool for creating litegapps or litegapps++
 # Cloning
 git clone https://github.com/wahyu6070/litegapps
 # Configure
-Edit config for edit configuration
+- Edit config for edit configuration
  
-Formats that are supported in compression : brotli,xz,gz,7zip,zstd
+- Formats that are supported in compression : brotli,xz,gz,7zip,zstd
 ### compression benchmark
 ![Benchmark](/etc/images/compres_lvl.jpg?raw=true "benchmark compression")
 # building
