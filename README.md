@@ -5,6 +5,9 @@ this is a tool for creating litegapps or litegapps++
 git clone https://github.com/wahyu6070/litegapps
 ## Configure
 edit config for edit configuration
+
+# compression is supported
+![Alt text](/images/compres_lvl.jpg?raw=true "Optional Title")
 ## building
 ``
 sh make (for building)
