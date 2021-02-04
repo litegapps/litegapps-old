@@ -50,10 +50,14 @@ func main() {
 		fmt.Scanln(&text)
 		switch text {
 			case 1:
-			cmd := exec.Command("sh", "pwd")Output()
+			makeSh := exec.Command("sh", "build.sh")
+        	makeSh.Stdout = os.Stdout
+        	makeSh.Run()
 			time.Sleep(3 * time.Second)
 			case 2:
-			fmt.Println("2")
+			cleanSh := exec.Command("sh", "build.sh", "clean")
+        	cleanSh.Stdout = os.Stdout
+        	cleanSh.Run()
 			time.Sleep(3 * time.Second)
 			case 3:
 			fmt.Println("3")
