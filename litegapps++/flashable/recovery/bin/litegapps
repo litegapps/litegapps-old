@@ -4,8 +4,8 @@
 #since 08-07-2019
 #License GPL3+
 
-propversion=V1.0
-propdate=25-11-2020
+propversion=V1.1
+propdate=29-12-2020
 
 # Colors
 GREEN='\e[01;32m'
@@ -751,7 +751,14 @@ case $pilih in
 2) gaming ;;
 3) menu battery "Battery Saver" ;;
 4) menu testping "Test Ping" ;;
-5) download_menu ;;
+5)
+	if [ -f /data/litegapps/litegapps_menu.sh ]; then
+		. /data/litegapps/litegapps_menu.sh 
+	else
+		error "Please Install Litegapps control !"
+		sleep 5s
+	fi
+;;
 6) menu meminfo "Memory Info" ;;
 7) menu device "Device info" ;;
 8) addon ;;
