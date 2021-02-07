@@ -6,4 +6,4 @@ bin=$base/bin/$ARCH32
 
 
 chmod 775 $base/build.sh
-time $bin/bash $base/build.sh $@
+$bin/bash $base/build.sh $@
