@@ -1,5 +1,5 @@
 # LiteGapps
-this is a tool for creating litegapps or litegapps++
+this is a tool for building litegapps or litegapps++
 
 # Cloning
 git clone https://github.com/wahyu6070/litegapps
