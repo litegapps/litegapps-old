@@ -1,5 +1,5 @@
-litegapps.version=0.9
-litegapps.version.code=9
+litegapps.version=1.0
+litegapps.version.code=10
 codename=stable
 name.builder=example
 build.status=example
