@@ -4,8 +4,8 @@
 #since 08-07-2019
 #License GPL3+
 
-propversion=V1.1
-propdate=29-12-2020
+propversion=V0.2
+propdate=04-04-2020
 
 # Colors
 GREEN='\e[01;32m'
@@ -742,7 +742,7 @@ print "1.Boost              6.Memory Info"
 print "2.Gaming Mode        7.Device Info"
 print "${batterystatus}8.Add on"
 print "4.Check Ping         9.About"
-print "${YELLOW}5.Download${GREEN}           10.Exit"
+print "${YELLOW}5.Litegapps Menu${GREEN}       10.Exit"
 print
 echo -n "Choose one of the numbers : "
 read pilih

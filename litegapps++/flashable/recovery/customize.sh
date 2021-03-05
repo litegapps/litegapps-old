@@ -13,13 +13,14 @@ loglive=$litegapps/log/litegapps_live.log
 files=$MODPATH/files
 SDKTARGET=$(getp ro.build.version.sdk $SYSDIR/build.prop)
 
+
 findarch=$(getp ro.product.cpu.abi $SYSDIR/build.prop | cut -d '-' -f -1)
 case $findarch in
 arm64) ARCH=arm64 ;;
 armeabi) ARCH=arm ;;
 x86) ARCH=x86 ;;
 x86_64) ARCH=x86_64 ;;
-*) abort " <$findarch> Your Architecture Not Support" ;;
+*) report_bug " <$findarch> Your Architecture Not Support" ;;
 esac
 
 
@@ -46,6 +47,20 @@ printlog "| Sdk             : $SDKTARGET"
 printlog "|___________________________________"
 printlog " "
 
+#mode installation
+case $TYPEINSTALL in
+kopi)
+sedlog "- Type install KOPI module"
+;;
+magisk)
+sedlog "- Type install KOPI installer convert to magisk module"
+;;
+*)
+sedlog "-Type install MAGISK module"
+;;
+esac
+
+#arch bin detected
 case $(uname -m) in
 *x86*) arch32=x86 ;;
 *) arch32=arm ;;
@@ -54,8 +69,7 @@ bin=$MODPATH/bin/$arch32
 
 chmod -R 775 $bin
 
-
-#diference litegapps++
+#### Diference litegapps++
 
 #checking format file
 if [ -f $files/files.tar.xz ]; then
@@ -69,7 +83,7 @@ format_file=gunzip
 elif [ -f $files/files.tar.zst ]; then
 format_file=zstd
 else
-abort "File Gapps not found or format not support"
+report_bug "File Gapps not found or format not support"
 listlog $files
 fi
 sedlog "Format file : $format_file"
@@ -92,7 +106,7 @@ gunzip) gz -d $files/files.tar.gz ;;
 brotli) $bin/brotli -dj $files/files.tar.br ;;
 zstd) $bin/zstd -df --rm $files/files.tar.zst ;;
 *)
-abort "File format not support"
+report_bug "File format not support"
 listlog $files
 esac
 
@@ -110,7 +124,7 @@ cdir $tmp/$ARCH/$SDKTARGET
 if [ -d $tmp/api/$SDKTARGET ]; then
 cp -a $tmp/api/$SDKTARGET/* $tmp/$ARCH/$SDKTARGET/
 else
-abort "Your Android Version Not Support"
+report_bug "Your Android Version Not Support"
 fi
 
 #arch
@@ -122,10 +136,9 @@ fi
 if [ -d $tmp/croos_system ]; then
 cp -af $tmp/croos_system/* $tmp/$ARCH/$API/
 fi
-#end defference litegapps
 
-#cheking sdk files
-   
+#### End defference litegapps++
+
 #extrack tar files
 print "- Extracting tar file"
 find $tmp/$ARCH/$SDKTARGET -name *.tar -type f 2>/dev/null | while read tarfile; do
@@ -152,7 +165,7 @@ del $apkdir
 cdir $apkdir
 mv -f $apkdir.apk $apkdir/
 cd $datanull
-done >> $loglive
+done >/dev/null
 del $datanull
 
 
@@ -253,6 +266,5 @@ printlog "- Open Terminal"
 printlog "- su"
 printlog "- litegapps"
 printlog " "
-printlog " Bug report : https://t.me/litegappsgroup"
 printlog " "
 

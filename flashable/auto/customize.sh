@@ -20,7 +20,7 @@ arm64) ARCH=arm64 ;;
 armeabi) ARCH=arm ;;
 x86) ARCH=x86 ;;
 x86_64) ARCH=x86_64 ;;
-*) abort " <$findarch> Your Architecture Not Support" ;;
+*) report_bug " <$findarch> Your Architecture Not Support" ;;
 esac
 
 
@@ -47,6 +47,20 @@ printlog "| Sdk             : $SDKTARGET"
 printlog "|___________________________________"
 printlog " "
 
+#mode installation
+case $TYPEINSTALL in
+kopi)
+sedlog "- Type install KOPI module"
+;;
+magisk)
+sedlog "- Type install KOPI installer convert to magisk module"
+;;
+*)
+sedlog "-Type install MAGISK module"
+;;
+esac
+
+#arch bin detected
 case $(uname -m) in
 *x86*) arch32=x86 ;;
 *) arch32=arm ;;
@@ -67,7 +81,7 @@ format_file=gunzip
 elif [ -f $files/arch.tar.zst ]; then
 format_file=zstd
 else
-abort "File Gapps not found or format not support"
+report_bug "File Gapps not found or format not support"
 listlog $files
 fi
 sedlog "Format file : $format_file"
@@ -75,7 +89,7 @@ sedlog "Format file : $format_file"
 
 #checking executable
 if [ $format_file ! xz ] && [ $format_file ! gunzip ] && [ ! -f $bin/$format_file ]; then
-abort "Executable not found"
+report_bug "Executable not found"
 else 
 sedlog "Executable $format_file found"
 listlog $bin
@@ -90,7 +104,7 @@ gunzip) gz -d $files/arch.tar.gz ;;
 brotli) $bin/brotli -dj $files/arch.tar.br ;;
 zstd) $bin/zstd -df --rm $files/arch.tar.zst ;;
 *)
-abort "File format not support"
+report_bug "File format not support"
 listlog $files
 esac
 
@@ -233,6 +247,5 @@ printlog "- Open Terminal"
 printlog "- su"
 printlog "- litegapps"
 printlog " "
-printlog " Bug report : https://t.me/litegappsgroup"
 printlog " "
 
