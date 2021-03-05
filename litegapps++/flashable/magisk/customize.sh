@@ -227,9 +227,9 @@ listlog $MODPATH
 listlog $litegapps
 ls -alZR $MODPATH/system >> $loglive
 cd $litegapps/log
-test -f $litegapps/log/litegapps_log.tar.gz && del $litegapps/log/litegapps_log.tar.gz
-tar -cz -f $litegapps/log/litegapps_log.tar.gz *
+$bin/busybox tar -cz -f $litegapps/litegapps_log_$(date '+%d•%m•%Y-%H•%M•%S').tar.gz *
 cd /
+del $litegapps/log
 fi
 
 #litegapps menu

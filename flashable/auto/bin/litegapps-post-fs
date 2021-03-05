@@ -65,7 +65,7 @@ insetapp=$(echo "$i" | head -n1 | cut -d : -f 2)
 done
 
 echo " " >> $log
-echo "# $(date '+%d/%m/%Y %H:%M:%S')" >> $log
+echo "# $(date '+%d•%m•%Y-%H•%M•%S')" >> $log
 echo "###########" >> $log
 echo "#   Done  #" >> $log
 echo "###########" >> $log
