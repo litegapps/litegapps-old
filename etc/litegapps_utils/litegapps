@@ -682,7 +682,7 @@ meminfo(){
 	}
 about(){
 print "$CYAN "
-print "Litegapps Control $propversion ($propdate)"
+print "Litegapps Controller $propversion ($propdate)"
 print "Copyright (C) 2020 wahyu kurniawan (wahyu6070)."
 print "License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>."
 print "This is free software: you are free to change and redistribute it."
@@ -742,7 +742,7 @@ print "1.Boost              6.Memory Info"
 print "2.Gaming Mode        7.Device Info"
 print "${batterystatus}8.Add on"
 print "4.Check Ping         9.About"
-print "${YELLOW}5.Litegapps Menu${GREEN}       10.Exit"
+print "${YELLOW}5.Litegapps Menu${GREEN}     10.Exit"
 print
 echo -n "Choose one of the numbers : "
 read pilih
@@ -755,7 +755,7 @@ case $pilih in
 	if [ -f /data/litegapps/litegapps_menu.sh ]; then
 		. /data/litegapps/litegapps_menu.sh 
 	else
-		error "Please Install Litegapps control !"
+		error "Please Install Litegapps controller !"
 		sleep 5s
 	fi
 ;;
