@@ -736,7 +736,7 @@ while true; do
 clear
 test -f $data/battery_saver && batterystatus="${VIOLET}3.Disable Battery... ${NC}${GREEN}" || batterystatus="3.Battery Saver      "
 print " "
-print "     ${YELLOW}Litegapps ${GREEN}Control $GREEN"
+print "     ${YELLOW}Litegapps ${GREEN}Controller $GREEN"
 print " "
 print "1.Boost              6.Memory Info"
 print "2.Gaming Mode        7.Device Info"
