@@ -1,7 +1,7 @@
 #!/sbin/sh
-# Kopi Installer V1.0
+# Kopi Installer V1.1
 # Since 08-05-2020
-# Latest Update 30-08-2020
+# Latest Update 17-03-2021
 # by wahyu6070 (dont change)
 
 OUTFD=/proc/self/fd/$2;
@@ -133,21 +133,17 @@ setime(){
     echo "usage : setime --help"
     fi
 }
-recovery_actions() {
-  OLD_LD_LIB=$LD_LIBRARY_PATH
-  OLD_LD_PRE=$LD_PRELOAD
-  OLD_LD_CFG=$LD_CONFIG_FILE
-  unset LD_LIBRARY_PATH
-  unset LD_PRELOAD
-  unset LD_CONFIG_FILE
-}
 
-recovery_cleanup() {
-  [ -z $OLD_LD_LIB ] || export LD_LIBRARY_PATH=$OLD_LD_LIB
-  [ -z $OLD_LD_PRE ] || export LD_PRELOAD=$OLD_LD_PRE
-  [ -z $OLD_LD_CFG ] || export LD_CONFIG_FILE=$OLD_LD_CFG
+set_prop() {
+  property="$1"
+  value="$2"
+  file_location="$3"
+  if grep -q "${property}" "${file_location}"; then
+    sed -i "s/\(${property}\)=.*/\1=${value}/g" "${file_location}"
+  else
+    echo "${property}=${value}" >>"${file_location}"
+  fi
 }
-
 ########################################
 #    Kopi Script
 ########################################
@@ -158,7 +154,6 @@ print "- Kopi Installer by wahyu6070";
 print " "
 show_progress 1.34 0;
 
-recovery_actions;
 #mount
 print "- Mounting"
 active_slot=`getprop ro.boot.slot_suffix`
@@ -270,6 +265,10 @@ else
 	cdir "/data/adb/modules/$ID"
 	touch "/data/adb/modules/$ID/update"
 	cp -pf $kopi/module.prop "/data/adb/modules/$ID/"
+	[ -f $kopi/magisk-uninstall.sh ] && cp -pf $kopi/magisk-uninstall.sh $modup/uninstall.sh && chmod 755 $modup/uninstall.sh
+	[ -f $kopi/magisk-system.prop ] && cp -pf $kopi/magisk-system.prop $modup/system.prop
+	[ -f $kopi/magisk-service.sh ] && cp -pf $kopi/magisk-service.sh $modup/service.sh && chmod 755 $modup/service.sh
+	[ -f $kopi/magisk-post-fs-data.sh ] && cp -pf $kopi/magisk-post-fs-data.sh $modup/post-fs-data.sh && chmod 755 $modup/post-fs-data.sh
 	cp -rdf $kopi/* "$modup"
 	del $modup/META-INF
 	del $modup/install.sh
@@ -333,7 +332,6 @@ fi
 #umount
 print "- Umounting";
 if [ $TYPEINSTALL = kopi ]; then
-recovery_cleanup
 umount /system
 umount /vendor
 fi
