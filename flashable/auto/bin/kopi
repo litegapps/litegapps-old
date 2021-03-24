@@ -3,7 +3,7 @@
 ####################################
 #          By : wahyu6070          #
 ####################################
-print(){ $BOOTMODE && echo "$1" || echo -e "ui_print $1\nui_print" >> $OUTFD; }
+print(){ ui_print "$1"; }
 	
 printlog(){
 	print "$1"

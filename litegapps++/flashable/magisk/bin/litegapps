@@ -4,8 +4,8 @@
 #since 08-07-2019
 #License GPL3+
 
-propversion=V0.2
-propdate=04-04-2020
+propversion=V0.3
+propdate=23-03-2021
 
 # Colors
 GREEN='\e[01;32m'
@@ -682,15 +682,13 @@ meminfo(){
 	}
 about(){
 print "$CYAN "
-print "Litegapps Control $propversion ($propdate)"
+print "Litegapps Controller $propversion ($propdate)"
 print "Copyright (C) 2020 wahyu kurniawan (wahyu6070)."
 print "License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>."
 print "This is free software: you are free to change and redistribute it."
 print "There is NO WARRANTY, to the extent permitted by law."
 print "${YELLOW}"
-print " Github  : https://github.com/wahyu6070 "
-print " Youtube : https://www.youtube.com/c/wahyu6070 "
-print " Xda     : @wahyu6070 "
+print " Github  : https://github.com/wahyu6070/litegapps "
 print " Telegram: https://t.me/litegapps"
 print " $GREEN"
 }
@@ -736,13 +734,13 @@ while true; do
 clear
 test -f $data/battery_saver && batterystatus="${VIOLET}3.Disable Battery... ${NC}${GREEN}" || batterystatus="3.Battery Saver      "
 print " "
-print "     ${YELLOW}Litegapps ${GREEN}Control $GREEN"
+print "     ${YELLOW}Litegapps ${GREEN}Controller $GREEN"
 print " "
 print "1.Boost              6.Memory Info"
 print "2.Gaming Mode        7.Device Info"
 print "${batterystatus}8.Add on"
 print "4.Check Ping         9.About"
-print "${YELLOW}5.Litegapps Menu${GREEN}       10.Exit"
+print "${YELLOW}5.Litegapps Menu${GREEN}     10.Exit"
 print
 echo -n "Choose one of the numbers : "
 read pilih
@@ -755,7 +753,7 @@ case $pilih in
 	if [ -f /data/litegapps/litegapps_menu.sh ]; then
 		. /data/litegapps/litegapps_menu.sh 
 	else
-		error "Please Install Litegapps control !"
+		error "Please Install Litegapps controller !"
 		sleep 5s
 	fi
 ;;
