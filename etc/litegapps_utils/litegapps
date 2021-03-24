@@ -4,8 +4,8 @@
 #since 08-07-2019
 #License GPL3+
 
-propversion=V0.2
-propdate=04-04-2020
+propversion=V0.3
+propdate=23-03-2021
 
 # Colors
 GREEN='\e[01;32m'
@@ -688,9 +688,7 @@ print "License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.
 print "This is free software: you are free to change and redistribute it."
 print "There is NO WARRANTY, to the extent permitted by law."
 print "${YELLOW}"
-print " Github  : https://github.com/wahyu6070 "
-print " Youtube : https://www.youtube.com/c/wahyu6070 "
-print " Xda     : @wahyu6070 "
+print " Github  : https://github.com/wahyu6070/litegapps "
 print " Telegram: https://t.me/litegapps"
 print " $GREEN"
 }
