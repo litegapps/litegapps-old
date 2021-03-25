@@ -1,3 +1,6 @@
+# Litegapps Core Script
+#
+#
 base="`dirname $(readlink -f "$0")`"
 chmod -R 775 $base/bin
 . $base/bin/kopi
@@ -32,11 +35,14 @@ esac
 #################################################
 #Updating
 #################################################
+if [ "$1" = update ]; then
+	printmid "Litegapps Updates"
+	print
+	print "-Updating kopi installer"
 
 
-
-
-
+exit 0
+fi
 #################################################
 #Cleaning dir
 #################################################
