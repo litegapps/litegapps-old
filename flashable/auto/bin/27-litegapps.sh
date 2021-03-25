@@ -4,11 +4,11 @@
 #by wahyu6070
 #
 . /tmp/backuptool.functions
-log=/data/media/0/Android/litegapps/40-litegapps.log
-loglive=log=/data/media/0/Android/litegapps/40-litegappslive.log
+log=/data/media/0/Android/litegapps/27-litegapps.log
+loglive=log=/data/media/0/Android/litegapps/27-litegappslive.log
 base=/data/kopi/modules/litegapps
 
-mkdir -p $(dirname $log)
+test ! -d $(dirname $log) && mkdir -p $(dirname $log)
 
 ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true || BOOTMODE=false
 $BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true
@@ -26,26 +26,13 @@ if ! $BOOTMODE; then
 print(){
 	ui_print "$1"
 	}
-	
-printlog(){
-	print "$1"
-	if [ "$1" != " " ]; then
-	print "$1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $log
-	print "$1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $loglive
-	else
-	print "$1" >> $log
-	print "$1" >> $loglive
-	fi
-	}
 sedlog(){
-	print "[Processing]  $1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $log
-	print "[Processing]  $1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $loglive
+	echo "[Processing]  $1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $log
+	echo "[Processing]  $1 [$(date '+%d/%m/%Y %H:%M:%S')]" >> $loglive
 	}
-	
-	
 #
 ch_con(){
-chcon -h u:object_r:system_file:s0 "$1" || setlog "Failed chcon $1"
+chcon -h u:object_r:system_file:s0 "$1" || sedlog "Failed chcon $1"
 }
 
 
@@ -66,6 +53,7 @@ case "$1" in
   print "Litegapps Backup"
     for i in $(cat $base/list_install_system); do
     	if [ -f $S/$i ] && [ ! -L $S/$i ] ; then
+    		sedlog "  Backuping •> $S/$i"
     		backup_file $S/$i
     	fi
     done
@@ -74,6 +62,7 @@ case "$1" in
   print "Litegapps Restore"
     for i in $(cat $base/list_install_system); do
     		dir1=`dirname $S/$i`
+    		sedlog "  Restoring •> $S/$i"
     		restore_file $S/$i
     		ch_con $dir1
     done
