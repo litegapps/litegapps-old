@@ -147,7 +147,7 @@ del(){ rm -rf "$@"; }
 cdir(){ mkdir -p "$@"; }
 
 ch_con(){
-chcon -h u:object_r:system_file:s0 "$1" || setlog "Failed chcon $1"
+chcon -h u:object_r:system_file:s0 "$1" || sedlog "Failed chcon $1"
 }
 
 tarex(){
