@@ -50,8 +50,7 @@ sh make clean (for cleaning)
 ``
 
 # Watch video building
-[![](https://youtu.be/m-wtBAqmizI/0.jpg)](https://youtu.be/m-wtBAqmizI "Litegapps building source tree")
-![Building Litegapps source tree](https://img.youtube.com/vi/m-wtBAqmizI/maxresdefault.jpg)](https://youtu.be/m-wtBAqmizI)
+[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=ek1j272iAmc)
 # Download
 [Click here](https://wahyu6070.github.io/litegapps)
 # Social Media
