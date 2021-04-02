@@ -50,7 +50,7 @@ sh make clean (for cleaning)
 ``
 
 # Watch video building
-[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=ek1j272iAmc)
+[<img src="https://img.youtube.com/vi/m-wtBAqmizI/maxresdefault.jpg" width="50%">](https://youtu.be/m-wtBAqmizI)
 # Download
 [Click here](https://wahyu6070.github.io/litegapps)
 # Social Media
