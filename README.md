@@ -4,7 +4,6 @@ this is a tool for building litegapps or litegapps++
 # Cloning
 git clone https://github.com/wahyu6070/litegapps
 # Configure
-```
 
 `` litegapps.version=1.1 `` litegapps version
  
@@ -34,7 +33,6 @@ git clone https://github.com/wahyu6070/litegapps
  
 `` litegapps2=false `` set true for building litegapps++
 
-```
 
 ### compression benchmark
 ![Benchmark](/etc/images/compres_lvl.jpg?raw=true "benchmark compression")
@@ -52,7 +50,7 @@ sh make clean (for cleaning)
 ``
 
 # Watch video building
-[![Building Litegapps source tree](https://youtu.be/m-wtBAqmizI)](https://youtu.be/m-wtBAqmizI "Litegapps building source tree")
+[![Building Litegapps source tree](https://youtu.be/m-wtBAqmizI/0.jpg)](https://youtu.be/m-wtBAqmizI "Litegapps building source tree")
 # Download
 [Click here](https://wahyu6070.github.io/litegapps)
 # Social Media
