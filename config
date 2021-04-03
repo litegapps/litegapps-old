@@ -1,5 +1,5 @@
-litegapps.version=1.1
-litegapps.version.code=11
+litegapps.version=1.2
+litegapps.version.code=12
 codename=stable
 name.builder=example
 build.status=example
@@ -11,5 +11,5 @@ date.time=200909271500
 compression=xz
 compression.level=9
 zip.level=9
-litegapps2=false
+litegapps2=true
 
