@@ -1,10 +1,10 @@
 id=litegapps
-name=Litegapps++ official
-version=v1.1
-versionCode=11
+name=Litegapps++ unofficial
+version=v1.2
+versionCode=12
 minsdk=off
 date=26-03-2021
 device=All
-author=wahyu6070
+author=alexander
 description=litegapps ++ is a google apps package that supports almost all arch and android versions while maintaining lightness, saving battery and more.
 typeinstall=kopi
