@@ -3,75 +3,90 @@ case $(uname -m) in
 *x86) ARCH32=x86 ;;
 *) ARCH32=arm
 esac
-bin=$base/../../bin/$ARCH32
+bin=$base/bin/$ARCH32
 chmod -R 777 $bin
+cd $base
+[ -d $base/input ] && rm -rf $base/input && mkdir -p $base/input || mkdir -p $base/input
+[ -d $base/tmp ] && rm -rf $base/tmp && mkdir -p $base/tmp || mkdir -p $base/tmp
+[ -d $base/output ] && rm -rf $base/output && mkdir -p $base/output || mkdir -p $base/output
 
-find $base -name *.zip -type f | while read zipname; do
-output=$base/gapps
-rm -rf $output
-mkdir -p $output
-$bin/unzip -o $zipname -d $output >/dev/null
-done
-
-find $base -name *.tar* -type f | while read filen; do
-out=$(echo "$filen" | cut -d '.' -f 1)
-echo "- Extracting $(basename $filen)"
-mkdir -p $out
-$bin/busybox tar -xf $filen -C $out
-rm -rf $filen
-done
-
-
-system=$base/system
-rm -rf $system
-mkdir -p $system
-mkdir -p $system/etc
-find $base -type d | while read asw; do
-case $asw in
-*nodpi/priv-app)
-echo "- Copying $asw"
-cp -af $asw $system/
-rm -rf $asw
-;;
-*nodpi/app)
-echo "- Copying $asw"
-cp -af $asw $system/
-rm -rf $asw
-;;
-*lib64)
-echo "- Copying $asw"
-cp -af $asw $system/
-rm -rf $asw
-;;
-*lib)
-echo "- Copying $asw"
-cp -af $asw $system/
-rm -rf $asw
-;;
-*framework)
-echo "- Copying $asw"
-cp -af $asw $system/
-rm -rf $asw
-;;
-*etc/default-permissions)
-echo "- Copying $asw"
-cp -af $asw $system/etc/
-rm -rf $asw
-;;
-*etc/sysconfig)
-echo "- Copying $asw"
-cp -af $asw $system/etc/
-rm -rf $asw
-;;
-*etc/preferred-apps)
-echo "- Copying $asw"
-cp -af $asw $system/etc/
-rm -rf $asw
-;;
-*permissions)
-echo "- Copying $asw"
-cp -af $asw $system/etc/
-rm -rf $asw
-;;
-esac
+for GAPPSNAME in $(ls -1 $base/input); do
+	if [ -f $base/input/$GAPPSNAME ]; then
+	clear
+	echo " OpenGapps Detected"
+	echo "- Extracting $GAPPSNAME"
+	test ! -d $base/tmp/$GAPPSNAME && mkdir -p $base/tmp/$GAPPSNAME
+	$bin/busybox unzip -o $base/input/$GAPPSNAME -d $base/tmp/$GAPPSNAME
+		find $base/tmp/$GAPPSNAME -type f -name *.lz | while read LZNAME; do
+		clear
+		echo "- Extracting •> $(basename $LZNAME)"
+		$bin/busybox tar -xf $LZNAME -C $(dirname $LZNAME)
+			find $base/tmp/$GAPPSNAME -type d | while read PACKAGE_MOVE; do
+				case $PACKAGE_MOVE in
+					*nodpi/priv-app)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/priv-app/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*nodpi/app)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/app/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*common/etc)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/etc/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*nodpi/etc)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/etc/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*nodpi/framework)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/framework/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*common/framework)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/framework/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*nodpi/lib)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/lib/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*common/lib)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/lib/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*common/lib64)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/lib/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+					*nodpi/lib64)
+					OUTPUT=$base/output/$GAPPSNAME/nodpi/system/lib64/
+					test ! -d $OUTPUT && mkdir -p $OUTPUT
+					echo "- Copying =•> $(basename $PACKAGE_MOVE)"
+					cp -af $PACKAGE_MOVE/* $OUTPUT
+					;;
+				esac
+			done
+		done
+	else
+	echo " $GAPPSNAME NOT SUPPORT FILE"
+	fi
 done
