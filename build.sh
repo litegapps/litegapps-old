@@ -31,6 +31,10 @@ wahyu6070) PROP_STATUS=official ;;
 *) PROP_STATUS=unofficial ;;
 esac
 
+#proses tmp
+for P_TMP in $base/log $tmp; do
+	[ -d $P_TMP ] && del $P_TMP && cdir $P_TMP || cdir $P_TMP
+done
 
 #################################################
 #Updating
@@ -86,6 +90,51 @@ if [ "$1" = clean ]; then
 fi
 
 #################################################
+# Resize apk file
+#################################################
+if [ "$1" = resize ]; then
+clear
+printlog "                 Resize Zip Apk"
+printlog
+	for LIST_GAPPS in $base/gapps $base/litegapps++/gapps; do
+		find $LIST_GAPPS -type f -name *.apk | while read S_APK ; do
+			APK_INPUT=$S_APK
+			NAME_APK="`basename $S_APK`"
+			SIZE_OLD="`du -sh $S_APK | cut -f1`"
+			SHA_OLD="`$bin/busybox md5sum -b $S_APK | cut -d ' ' -f1`"
+			test ! -d $tmp/$NAME_APK && cdir $tmp/$NAME_APK
+			printlog "                 Resize $NAME_APK"
+			printlog " "
+			printlog "- Input => $APK_INPUT"
+			printlog "- Unziping"
+			$bin/unzip -o $APK_INPUT -d $tmp/$NAME_APK >> $loglive
+			cd $tmp/$NAME_APK
+			printlog "- Zipping"
+			$bin/zip -r9 $tmp/$NAME_APK/$NAME_APK . >> $loglive
+			SIZE_NEW="`du -sh $tmp/$NAME_APK/$NAME_APK | cut -f1`"
+			SHA_NEW="`$bin/busybox md5sum -b $tmp/$NAME_APK/$NAME_APK | cut -d ' ' -f1`"
+			if [ ! "$SHA_OLD" = "$SHA_NEW" ]; then
+				if [ -f $tmp/$NAME_APK/$NAME_APK ] && [ -f $APK_INPUT ]; then
+				printlog "- Copying $NAME_APK"
+				cp -pf $tmp/$NAME_APK/$NAME_APK $APK_INPUT
+				else
+				printlog "- Skipping file ===> $tmp/$NAME_APK/$NAME_APK ===> $APK_INPUT Not Found !!"
+				fi
+			else
+			printlog "- Skipping cp $tmp/$NAME_APK/$NAME_APK"
+			fi
+			printlog "- Old size =  $SIZE_OLD"
+			printlog "- New size =  $SIZE_NEW"
+			printlog "- MD5 old  = $SHA_OLD"
+			printlog "- MD5 new  = $SHA_NEW"
+			printlog " "
+			del $tmp/$NAME_APK
+		done
+	done
+del $tmp
+exit 0
+fi
+#################################################
 # Git update repository
 #################################################
 
@@ -130,11 +179,6 @@ printlog " "
 sys_gapps=$base/gapps/$PROP_ARCH/$PROP_SDK/system
 ven_gapps=$base/gapps/$PROP_ARCH/$PROP_SDK/vendor
 
-
-[ -d $base/log ] && del $base/log
-[ ! -d $base/log ] && cdir $base/log
-[ -d $tmp ] && del $tmp
-[ ! -d $tmp ] && cdir $tmp
 
 if [[ $PROP_ARCH == all || $PROP_ARCH == All ]]; then
 cp -af $base/gapps/* $tmp/
@@ -360,7 +404,7 @@ if [ -f $finput ]; then
 	done
 fi
 
-finput=$LITEGAPPS_UTILS/kopi
+finput=$LITEGAPPS_UTILS/litegapps-functions
 if [ -f $finput ]; then
 	for X in $flashable $flashable2; do
 		for Z in $(ls -1 $X); do
