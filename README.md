@@ -37,16 +37,16 @@ git clone https://github.com/wahyu6070/litegapps
 ### compression benchmark
 ![Benchmark](/etc/images/compres_lvl.jpg?raw=true "benchmark compression")
 # building
-``
-sh make (for building)
-``
+``sh make (Building)``
+ 
+``sh make update (Updating,script,binary,and other)``
  
 ``
-sh make update (for updating,script,binary)
+sh make resize (Resize apk to zio best compress"
 ``
- 
+
 ``
-sh make clean (for cleaning)
+sh make clean (Cleaning Directory)
 ``
 
 # Watch video building
