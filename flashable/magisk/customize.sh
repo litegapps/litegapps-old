@@ -1,10 +1,18 @@
 # LiteGapps
+# customize.sh 
+# latest update 04-04-2021
 # By wahyu6070
-chmod 777 $MODPATH/bin/kopi
-#kopi functions
-. $MODPATH/bin/kopi
+chmod 755 $MODPATH/bin/litegapps-functions
+#litegapps functions
+. $MODPATH/bin/litegapps-functions
 #path
-test -f /system_root/system/build.prop && SYSDIR=/system_root/system || test -f /system/system/build.prop && SYSDIR=/system/system || SYSDIR=/system
+if [ -f /system_root/system/build.prop ]; then
+SYSDIR=/system_root/system 
+elif [ -f /system/system/build.prop ]; then
+SYSDIR=/system/system
+else
+SYSDIR=/system
+fi
 VENDIR=/vendor
 tmp=/data/adb/litegapps
 litegapps=/data/media/0/Android/litegapps
@@ -12,8 +20,6 @@ log=$litegapps/log/litegapps.log
 loglive=$litegapps/log/litegapps_live.log
 files=$MODPATH/files
 SDKTARGET=$(getp ro.build.version.sdk $SYSDIR/build.prop)
-
-
 findarch=$(getp ro.product.cpu.abi $SYSDIR/build.prop | cut -d '-' -f -1)
 case $findarch in
 arm64) ARCH=arm64 ;;
@@ -23,29 +29,16 @@ x86_64) ARCH=x86_64 ;;
 *) report_bug " <$findarch> Your Architecture Not Support" ;;
 esac
 
+for CCCACHE in $litegapps/log $tmp; do
+del $CCCACHE
+cdir $CCCACHE
+done
 
-del $litegapps/log
-cdir $litegapps/log
-del $tmp
-cdir $tmp
-printlog "____________________________________"
-printlog "|"
-printlog "| Name            : $MODULENAME"
-printlog "| Version         : $MODULEVERSION"
-printlog "| Build date      : $MODULEDATE"
-printlog "| By              : $MODULEAUTHOR"
-printlog "|___________________________________"
-printlog "|"
-printlog "| Telegram        : https://t.me/litegapps"
-printlog "|___________________________________"
-printlog "|              Device Info"
-printlog "| Name Rom        : $ANDROIDROM"
-printlog "| Device          : $ANDROIDMODEL ($ANDROIDDEVICE)"
-printlog "| Android Version : $ANDROIDVERSION"
-printlog "| Architecture    : $ARCH"
-printlog "| Sdk             : $SDKTARGET"
-printlog "|___________________________________"
-printlog " "
+#functions litegapps info module.prop and build.prop
+litegapps_info
+
+#detected build.prop
+[ -f $SYSDIR/build.prop ] || report_bug "System build.prop not found"
 
 #mode installation
 case $TYPEINSTALL in
@@ -112,7 +105,7 @@ esac
 printlog "- Extracting archive"
 if [ -f $files/arch.tar ]; then
 sedlog "Extracting $files/$ARCH.tar"
-tar -xf $files/arch.tar -C $tmp
+$bin/busybox tar -xf $files/arch.tar -C $tmp
 listlog $files
 fi
 
@@ -127,7 +120,7 @@ tarout=`echo "$tarfile" | cut -d '.' -f -1`
 tarin=$tarfile
 tarout=`dirname "$(readlink -f $tarin)"`
 while_log "- Extracting tar : $tarin"
-tarex $tarin $tarout
+$bin/busybox tar -xf $tarin -C $tarout
 del $tarin
 done >> $loglive
 
@@ -139,6 +132,7 @@ cdir $datanull
 print "- Building Gapps"
 find $tmp/$ARCH/$SDKTARGET -name AndroidManifest.xml -type f 2>/dev/null | while read xml_name; do
 apkdir=`dirname "$(readlink -f $xml_name)"`
+apk_zip_level=0
 while_log "- Creating Archive Apk : $apkdir"
 cd $apkdir
 $bin/zip -r0 $apkdir.apk *
@@ -205,27 +199,6 @@ chmod 644 $setperm_file
 done >> $loglive
 
 
-#creating log
-printlog "- Creating log"
-if [ -f $SYSDIR/build.prop ]; then
-cp -pf $SYSDIR/build.prop $litegapps/log/sys_build.prop
-fi
-
-if [ -f $VENDIR/build.prop ]; then
-cp -pf $VENDIR/build.prop $litegapps/log/ven_build.prop
-fi
-
-if [ -d $litegapps/log ]; then
-listlog $tmp
-listlog $MODPATH
-listlog $litegapps
-ls -alZR $MODPATH/system >> $loglive
-cd $litegapps/log
-$bin/busybox tar -cz -f $litegapps/litegapps_log_$(date '+%d•%m•%Y-%H•%M•%S').tar.gz *
-cd /
-del $litegapps/log
-fi
-
 #litegapps menu
 cdir $MODPATH/system/bin
 cp -pf $MODPATH/bin/litegapps $MODPATH/system/bin/
@@ -237,15 +210,13 @@ cp -pf $MODPATH/bin/litegapps-post-fs /data/adb/service.d/
 chmod 755 /data/adb/service.d/litegapps-post-fs
 fi
 
+#creating log
+make_log
+
+
 printlog "- Cleaning cache"
 test -d $files && del $files
 test -d $tmp && del $tmp
 
-printlog
-printlog "*Tips"
-printlog "- Open Terminal"
-printlog "- su"
-printlog "- litegapps"
-printlog " "
-printlog " "
-
+#terminal tips
+terminal_tips
